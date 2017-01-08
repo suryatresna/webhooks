@@ -7,4 +7,4 @@ if ($verify_token === 'abc123') {
 }
 
 $input = json_decode(file_get_contents('php://input'), true);
-error_log(print_r($input, true));
+error_log(print_r($input['entry'][0]['changes'][0]['value']['leadgen_id'], true));
