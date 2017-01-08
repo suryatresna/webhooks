@@ -6,5 +6,20 @@ if ($verify_token === 'abc123') {
   echo $challenge;
 }
 
+function recursive_array_search($needle,$haystack) {
+    foreach($haystack as $key=>$value) {
+        $current_value = $value;
+        if($needle===$key OR (is_array($value) && ($current_value = recursive_array_search($needle,$value)) !== false)) {
+            return $current_value;
+        }
+    }
+    return false;
+}
+
 $input = json_decode(file_get_contents('php://input'), true);
-error_log(print_r($input['entry'][0]['changes'][0]['value']['leadgen_id'], true));
+
+if(is_array($input)) {
+    if($lead_id = $this->recursive_array_search('leadgen_id',$input)) {
+	    error_log('Leadgen ID has detected. ID: '.$lead_id);
+    }
+}
