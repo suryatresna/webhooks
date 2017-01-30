@@ -21,5 +21,6 @@ $input = json_decode(file_get_contents('php://input'), true);
 if(is_array($input)) {
     if(($lead_id = recursive_array_search('leadgen_id',$input)) !== false) {
 	    error_log('Leadgen ID has detected. ID: '.$lead_id);
+        error_log(print_r($input, true));
     }
 }
